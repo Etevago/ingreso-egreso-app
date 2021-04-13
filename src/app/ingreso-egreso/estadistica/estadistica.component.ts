@@ -1,6 +1,6 @@
+import { AppStateIngreso } from './../ingreso-egreso.reducer';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/app.reducer';
 import { IngresoEgreso } from 'src/app/models/ingreso-egreso.model';
 
 
@@ -20,7 +20,7 @@ export class EstadisticaComponent implements OnInit {
 
 
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppStateIngreso>) {
   }
 
   ngOnInit(): void {

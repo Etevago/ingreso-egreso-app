@@ -1,3 +1,4 @@
+import { AppStateIngreso } from './../ingreso-egreso.reducer';
 import { IngresoEgresoService } from './../../services/ingreso-egreso.service';
 import { Subscription } from 'rxjs';
 import { unSetItems } from './../ingreso-egreso.actions';
@@ -18,7 +19,7 @@ export class DetalleComponent implements OnInit, OnDestroy {
   ingresosEgresos: IngresoEgreso[] = [];
   ingresosSubs: Subscription;
 
-  constructor(private store: Store<AppState>, private ies: IngresoEgresoService) { }
+  constructor(private store: Store<AppStateIngreso>, private ies: IngresoEgresoService) { }
 
   ngOnInit(): void {
     this.ingresosSubs = this.store.select("ingresosEgresos").subscribe(({ items }) => {
