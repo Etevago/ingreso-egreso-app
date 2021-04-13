@@ -1,3 +1,4 @@
+import { unSetItems } from './../ingreso-egreso/ingreso-egreso.actions';
 import * as auth from './../auth/auth.actions';
 import { Usuario } from './../models/usuario.model';
 import { Injectable, OnDestroy } from '@angular/core';
@@ -14,6 +15,11 @@ import { Subscription } from 'rxjs';
 export class AuthService {
 
   userSub: Subscription;
+  private _user: Usuario;
+
+  get user() {
+    return this._user
+  }
 
   constructor(public auth: AngularFireAuth, public firestore: AngularFirestore, private store: Store) { }
 
@@ -23,11 +29,14 @@ export class AuthService {
       if (user) {
         this.userSub = this.firestore.doc(`${user.uid}/usuario`).valueChanges().subscribe((fireUser: any) => {
           const user = Usuario.fromFirebase(fireUser)
+          this._user = user;
           this.store.dispatch(auth.setUser({ user }))
         })
       } else {
         this.userSub.unsubscribe()
+        this._user = null;
         this.store.dispatch(auth.unSetUser())
+        this.store.dispatch(unSetItems())
       }
     })
   }
