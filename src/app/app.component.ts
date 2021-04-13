@@ -10,5 +10,6 @@ export class AppComponent {
 
 constructor(private AuthService:AuthService){
   this.AuthService.initAuthListener()
+  
 }
 }
